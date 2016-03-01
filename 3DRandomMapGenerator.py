@@ -1,8 +1,5 @@
 import random
 from WriteMapToFile import write_3d_map_to_file
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
-import numpy as np
 
 
 def generate_map(depth, percentage_occupied_cells, seed):
@@ -37,39 +34,6 @@ def generate_free_map(depth):
     width = 2**depth
     map = [[[0 for i in range(width)] for i in range(width)] for i in range(width)]
     return map
-
-
-def visualize_map(map, res):
-    width = len(map)
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    ax.set_aspect("equal")
-
-    for x in range(width):
-        for y in range(width):
-            for z in range(width):
-                if map[x][y][z] == 1:
-                    draw_cube(ax, (x * res[0], y * res[1], z * res[2]), res[0], res[1], res[2])
-
-    ax.set_xlabel('X axis')
-    ax.set_ylabel('Y axis')
-    ax.set_zlabel('Z axis')
-
-    plt.show()
-
-
-def draw_cube(ax, pos, size_x, size_y, size_z):
-    X, Y = np.meshgrid([pos[0], pos[0] + size_x], [pos[1], pos[1] + size_x])
-    ax.plot_surface(X, Y, pos[2], alpha=0.2)
-    ax.plot_surface(X, Y, pos[2] + size_z, alpha=0.2)
-
-    Y, Z = np.meshgrid([pos[1], pos[1] + size_y], [pos[2], pos[2] + size_z])
-    ax.plot_surface(pos[0], Y, Z, alpha=0.2)
-    ax.plot_surface(pos[0] + size_x, Y, Z, alpha=0.2)
-
-    X, Z = np.meshgrid([pos[0], pos[0] + size_x], [pos[2], pos[2] + size_z])
-    ax.plot_surface(X, pos[1], Z, alpha=0.2)
-    ax.plot_surface(X, pos[1] + size_y, Z, alpha=0.2)
 
 
 def main():
