@@ -7,7 +7,27 @@ def main():
     data = read_map_from_file('3dmapdepth4.txt')
     map = data[0]
     res = data[1]
-    visualize_map(map, res)
+
+    path = read_path_from_file('path.txt')
+
+    visualize_map(map, res, path)
+
+
+def read_path_from_file(file_name):
+    f = open(file_name, 'r')
+
+    line = f.readline()
+
+    path = []
+
+    while line:
+        point = [int(float(i)) for i in line.split()]
+        path.append(point)
+        line = f.readline()
+
+    f.close()
+
+    return path
 
 
 def read_map_from_file(file_name):
@@ -34,7 +54,7 @@ def read_map_from_file(file_name):
     return map, resolution
 
 
-def visualize_map(map, res):
+def visualize_map(map, res, path):
     width = len(map)
     fig = plt.figure()
     ax = fig.gca(projection='3d')
@@ -46,11 +66,20 @@ def visualize_map(map, res):
                 if map[x][y][z] == 1:
                     draw_cube(ax, (x * res[0], y * res[1], z * res[2]), res[0], res[1], res[2])
 
+    draw_path(ax, path)
+
     ax.set_xlabel('X axis')
     ax.set_ylabel('Y axis')
     ax.set_zlabel('Z axis')
 
     plt.show()
+
+
+def draw_path(ax, path):
+    for i in range(len(path) - 1):
+        p0 = path[i]
+        p1 = path[i + 1]
+        ax.plot([p0[0], p1[0]], [p0[1], p1[1]], [p0[2], p1[2]], color='red')
 
 
 def draw_cube(ax, pos, size_x, size_y, size_z):

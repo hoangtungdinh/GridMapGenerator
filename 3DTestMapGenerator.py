@@ -10,6 +10,7 @@ def generate_free_map(depth):
 
 def main():
     write_3d_map_to_file(generate_free_map(1), (1000, 1000, 1000), 'test_freemapdepth1.txt')
+    write_3d_map_to_file(generate_free_map(2), (1000, 1000, 1000), 'test_freemapdepth2.txt')
 
     map = generate_free_map(2)
     freeCells = [(3, 2, 1), (2, 2, 1), (2, 1, 1), (1, 1, 0), (1, 0, 0), (0, 0, 0)]
