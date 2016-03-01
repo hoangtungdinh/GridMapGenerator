@@ -74,7 +74,7 @@ def draw_cube(ax, pos, size_x, size_y, size_z):
 
 def main():
     # generate a free map
-    depth = 10
+    depth = 8
     resolution = (1000, 1000, 1000)
     write_3d_map_to_file(generate_map(depth, 0, 1), resolution, "map/map0obs.txt")
     random.seed(1)
@@ -84,7 +84,7 @@ def main():
     for percent in percentage:
         for i in range(30):
             seed = seed_list.pop(0)
-            file_name = 'map/map' + str(percent) + 'percentseed' + str(seed) + '.txt'
+            file_name = 'map/map' + str(percent) + 'percent' + str(i) + '.txt'
             write_3d_map_to_file(generate_map(depth, percent, seed), resolution, file_name)
 
 

@@ -45,7 +45,7 @@ def main():
     for percent in percentage:
         for i in range(30):
             seed = seed_list.pop(0)
-            file_name = 'map' + str(percent) + 'percentseed' + str(seed)
+            file_name = 'map' + str(percent) + 'percent' + str(i)
             generate_map(depth, (1, 1), percent, seed, file_name)
 
 
