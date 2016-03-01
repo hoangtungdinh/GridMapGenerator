@@ -76,7 +76,7 @@ def main():
     # generate a free map
     depth = 10
     resolution = (1000, 1000, 1000)
-    write_3d_map_to_file(generate_map(depth, 0, 1), resolution, "map0obs")
+    write_3d_map_to_file(generate_map(depth, 0, 1), resolution, "map/map0obs.txt")
     random.seed(1)
     seed_list = random.sample(range(1, 1000000), 180)
     percentage = [5, 10, 15, 20, 25, 30]
@@ -84,7 +84,7 @@ def main():
     for percent in percentage:
         for i in range(30):
             seed = seed_list.pop(0)
-            file_name = 'map' + str(percent) + 'percentseed' + str(seed)
+            file_name = 'map/map' + str(percent) + 'percentseed' + str(seed) + '.txt'
             write_3d_map_to_file(generate_map(depth, percent, seed), resolution, file_name)
 
 
