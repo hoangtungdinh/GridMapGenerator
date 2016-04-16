@@ -3,24 +3,18 @@ from WriteMapToFile import write_3d_map_to_file
 
 
 def generate_map(depth, percentage_occupied_cells, seed):
-
-    width = 2**depth
-    num_of_objects = int(width**3 * percentage_occupied_cells / 100)
+    width = 2 ** depth
+    num_of_objects = int(width ** 3 * percentage_occupied_cells / 100)
     random.seed(seed)
 
-    object_pos = []
+    all_pos = set()
 
-    for i in range(num_of_objects):
-        x = random.randrange(width)
-        y = random.randrange(width)
-        z = random.randrange(width)
+    for x in range(width):
+        for y in range(width):
+            for z in range(width):
+                all_pos.add((x, y, z))
 
-        while (x, y, z) in object_pos:
-            x = random.randrange(width)
-            y = random.randrange(width)
-            z = random.randrange(width)
-
-        object_pos.append((x, y, z))
+    object_pos = random.sample(all_pos, num_of_objects)
 
     map = generate_free_map(depth)
 
@@ -31,7 +25,7 @@ def generate_map(depth, percentage_occupied_cells, seed):
 
 
 def generate_free_map(depth):
-    width = 2**depth
+    width = 2 ** depth
     map = [[[0 for i in range(width)] for i in range(width)] for i in range(width)]
     return map
 
@@ -50,6 +44,7 @@ def main():
             seed = seed_list.pop(0)
             file_name = 'map/map' + str(percent) + 'percent' + str(i) + '.txt'
             write_3d_map_to_file(generate_map(depth, percent, seed), resolution, file_name)
+            print("Done " + file_name + "\n")
 
 
 if __name__ == '__main__':
