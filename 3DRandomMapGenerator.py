@@ -27,10 +27,6 @@ def main():
     # generate a free map
     depth = 8
     resolution = (1000, 1000, 1000)
-    write_3d_map_to_file(generate_map(depth, 0, 1), resolution, "map/map0obs.txt")
-    random.seed(1)
-    seed_list = random.sample(range(1, 1000000), 180)
-    percentage = [5, 10, 15, 20, 25, 30]
 
     width = 2 ** depth
     all_pos = set()
@@ -38,6 +34,11 @@ def main():
         for y in range(width):
             for z in range(width):
                 all_pos.add((x, y, z))
+
+    write_3d_map_to_file(generate_map(depth, 0, 1, all_pos), resolution, "map/map0obs.txt")
+    random.seed(1)
+    seed_list = random.sample(range(1, 1000000), 180)
+    percentage = [5, 10, 15, 20, 25, 30]
 
     for percent in percentage:
         for i in range(30):
